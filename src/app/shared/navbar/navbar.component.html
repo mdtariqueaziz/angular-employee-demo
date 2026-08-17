@@ -1,0 +1,80 @@
+<!-- Sidebar -->
+<aside class="sidebar">
+  <!-- Brand -->
+  <a class="sidebar-brand" routerLink="/dashboard">
+    <div class="sidebar-brand-icon">
+      <i class="bi bi-people-fill"></i>
+    </div>
+    <div>
+      <div class="sidebar-brand-text">EmpTrack</div>
+      <div class="sidebar-brand-sub">Management System</div>
+    </div>
+  </a>
+
+  <!-- Navigation -->
+  <div class="sidebar-section">
+    <div class="sidebar-section-label">Main Menu</div>
+    <ul class="sidebar-nav">
+      <li>
+        <a routerLink="/dashboard" routerLinkActive="active-link">
+          <i class="bi bi-speedometer2 nav-icon"></i>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a routerLink="/employees" routerLinkActive="active-link" [routerLinkActiveOptions]="{ exact: true }">
+          <i class="bi bi-people nav-icon"></i>
+          Employees
+        </a>
+      </li>
+      <li>
+        <a routerLink="/employees/add" routerLinkActive="active-link">
+          <i class="bi bi-person-plus nav-icon"></i>
+          Add Employee
+        </a>
+      </li>
+      <li>
+        <a routerLink="/departments" routerLinkActive="active-link">
+          <i class="bi bi-building nav-icon"></i>
+          Departments
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="sidebar-footer">
+    &copy; {{ currentYear }} EmpTrack v1.0
+  </div>
+</aside>
+
+<!-- Top Navbar -->
+<nav class="top-navbar">
+  <div class="d-flex align-items-center gap-3 me-auto">
+    <i class="bi bi-list fs-4 text-secondary" style="cursor:pointer;"></i>
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb mb-0" style="font-size:0.85rem;">
+        <li class="breadcrumb-item"><a routerLink="/dashboard" class="text-decoration-none text-primary">Home</a></li>
+        <li class="breadcrumb-item active text-muted">{{ getPageTitle() }}</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- Right side -->
+  <div class="d-flex align-items-center gap-3">
+    <!-- Notification bell -->
+    <button class="btn btn-light btn-sm rounded-circle" style="width:36px;height:36px;">
+      <i class="bi bi-bell" style="font-size:0.9rem;"></i>
+    </button>
+
+    <!-- User avatar -->
+    <div class="d-flex align-items-center gap-2">
+      <div class="avatar" style="background:linear-gradient(135deg,#3f51b5,#5c6bc0); font-size:0.75rem;">
+        AD
+      </div>
+      <div style="font-size:0.82rem;">
+        <div class="fw-semibold" style="line-height:1.2;">Admin User</div>
+        <div class="text-muted" style="font-size:0.72rem;">Administrator</div>
+      </div>
+    </div>
+  </div>
+</nav>

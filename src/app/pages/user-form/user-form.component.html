@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>{{ user.id ? 'Edit User' : 'Add User' }}</h2>
+<mat-dialog-content class="dialog-content">
+  <mat-form-field class="full-width">
+    <mat-label>FirstName</mat-label>
+    <input matInput [(ngModel)]="user.firstName">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>LastName</mat-label>
+    <input matInput type="email" [(ngModel)]="user.lastName">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Department</mat-label>
+    <input matInput type="tel" [(ngModel)]="user.department">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Email</mat-label>
+    <input matInput type="tel" [(ngModel)]="user.email">
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <mat-label>Phone</mat-label>
+    <input matInput type="tel" [(ngModel)]="user.phone">
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
+  <button mat-button color="primary" (click)="saveUser()">Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,27 @@
+<h2>Select a color</h2>
+<select [(ngModel)]="selectedColor">
+    <option value="red">Red</option>
+    <option value="green">Green</option>
+    <option value="blue">Blue</option>
+    <option value="yellow">Yellow</option>
+
+</select>
+
+<div [ngSwitch]="selectedColor">
+    <p *ngSwitchCase="'red'" style="color: red;">You selected Red!</p>
+    <p *ngSwitchCase="'green'" style="color: green;">You selected Green!</p>
+    <p *ngSwitchCase="'blue'" style="color: blue;">You selected Blue!</p>
+    <p *ngSwitchCase="'yellow'" style="color: yellow;">You selected Yellow!</p>
+    <p *ngSwitchDefault style="color: gray;">Please select a color.</p>
+
+</div>
+
+<ul>
+
+    <li *ngFor="let item of items">{{item.name}}</li>
+</ul>
+
+<p [ngStyle]="myStyles">Styled paragraph using ngStyle!</p>
+
+<p [ngStyle]="getStyle()">Click the button to change styles dynamically!</p>
+<button (click)="isHighlighted = !isHighlighted">Toggle Highlight</button>
