@@ -1,0 +1,9 @@
+<h1>{{ title | uppercase }}</h1> <!-- Convert to uppercase -->
+<p>Lowercase: {{ title | lowercase }}</p>
+<p>Title Case: {{ title | titlecase }}</p>
+<p>Date: {{ today | date:'fullDate' }}</p>
+<p>Currency: {{ price | currency:'USD' }}</p>
+<p>Percentage: {{ percentage | percent }}</p>
+<p>JSON: {{ user | json }}</p>
+
+<h2>{{title | customUppercase}}</h2>

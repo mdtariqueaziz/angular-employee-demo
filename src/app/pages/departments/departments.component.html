@@ -1,0 +1,113 @@
+<div class="page-header">
+  <div>
+    <h1 class="page-title">Departments</h1>
+    <p class="page-subtitle">{{ departments.length }} departments across {{ totalEmployees }} employees</p>
+  </div>
+</div>
+
+<!-- Search -->
+<div class="mb-4">
+  <div class="search-bar-wrapper" style="max-width:340px;">
+    <i class="bi bi-search search-icon"></i>
+    <input type="text" class="form-control" placeholder="Search departments..."
+      [(ngModel)]="searchTerm" style="border-radius:8px;font-size:0.88rem;padding-left:36px;">
+  </div>
+</div>
+
+<!-- Loading -->
+<div *ngIf="loading" class="loading-overlay">
+  <mat-spinner diameter="48"></mat-spinner>
+</div>
+
+<!-- Department Cards Grid -->
+<div *ngIf="!loading" class="row g-4">
+  <div class="col-xl-4 col-md-6" *ngFor="let dept of filteredDepartments">
+    <div class="dept-card" [style.borderLeftColor]="dept.color">
+      <!-- Card Header -->
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <div class="d-flex align-items-center gap-3">
+          <div style="width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;"
+            [style.background]="dept.bgColor">
+            <i class="bi bi-building" [style.color]="dept.color" style="font-size:1.2rem;"></i>
+          </div>
+          <div>
+            <div class="fw-bold" style="font-size:0.95rem;color:#1a237e;">{{ dept.name }}</div>
+            <div class="text-muted" style="font-size:0.75rem;">{{ dept.employees.length }} members</div>
+          </div>
+        </div>
+        <div class="fw-bold" style="font-size:1.6rem;" [style.color]="dept.color">
+          {{ dept.employees.length }}
+        </div>
+      </div>
+
+      <!-- Progress bar -->
+      <div class="mb-3">
+        <div class="d-flex justify-content-between mb-1">
+          <span style="font-size:0.72rem;color:#aaa;font-weight:500;">% of workforce</span>
+          <span style="font-size:0.72rem;font-weight:700;" [style.color]="dept.color">
+            {{ getPercentage(dept) }}%
+          </span>
+        </div>
+        <div class="progress" style="height:6px;border-radius:10px;background:#f0f0f0;">
+          <div class="progress-bar" role="progressbar"
+            [style.width.%]="getPercentage(dept)"
+            [style.background]="dept.color"
+            style="border-radius:10px; transition:width 0.6s ease;">
+          </div>
+        </div>
+      </div>
+
+      <!-- Active / Inactive counts -->
+      <div class="d-flex gap-3 mb-3">
+        <div class="d-flex align-items-center gap-1" style="font-size:0.8rem;">
+          <i class="bi bi-circle-fill" style="color:#2e7d32;font-size:0.5rem;"></i>
+          <span>{{ getActiveCount(dept) }} Active</span>
+        </div>
+        <div class="d-flex align-items-center gap-1" style="font-size:0.8rem;">
+          <i class="bi bi-circle-fill" style="color:#c62828;font-size:0.5rem;"></i>
+          <span>{{ dept.employees.length - getActiveCount(dept) }} Inactive</span>
+        </div>
+      </div>
+
+      <!-- Member avatars -->
+      <div class="d-flex align-items-center" style="height:32px;">
+        <div *ngFor="let emp of dept.employees.slice(0, 5); let i = index"
+          class="avatar"
+          [style.background]="getAvatarColor(emp.firstName)"
+          [style.marginLeft]="i > 0 ? '-10px' : '0'"
+          [style.zIndex]="10 - i"
+          [style.border]="'2px solid white'"
+          [style.fontSize]="'0.65rem'"
+          [style.width]="'30px'"
+          [style.height]="'30px'"
+          [matTooltip]="emp.firstName + ' ' + emp.lastName">
+          {{ getInitials(emp) }}
+        </div>
+        <div *ngIf="dept.employees.length > 5"
+          class="d-flex align-items-center justify-content-center"
+          style="width:30px;height:30px;border-radius:50%;background:#f0f0f0;color:#555;
+                 font-size:0.65rem;font-weight:700;margin-left:-10px;border:2px solid white;z-index:5;">
+          +{{ dept.employees.length - 5 }}
+        </div>
+      </div>
+
+      <!-- View button -->
+      <div class="mt-3 pt-3 border-top">
+        <button class="btn btn-sm w-100" [style.color]="dept.color"
+          [style.borderColor]="dept.color"
+          style="border-radius:8px;font-size:0.82rem;border-width:1px;border-style:solid;"
+          (click)="viewDeptEmployees(dept)">
+          <i class="bi bi-arrow-right me-1"></i>View Employees
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="filteredDepartments.length === 0">
+    <div class="empty-state">
+      <i class="bi bi-building"></i>
+      <p>No departments found.</p>
+    </div>
+  </div>
+</div>
